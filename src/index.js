@@ -3,10 +3,14 @@ import {Editor,RichUtils,CompositeDecorator} from 'draft-js';
 import {resetBlockWithType,addNewBlockAt,getCurrentBlock,createEditorState,findLinkEntities} from './func'
 import isSoftNewlineEvent from 'draft-js/lib/isSoftNewlineEvent';
 import {CONTINUS_BLOCKS} from './constant'
+
+import './iconfont/iconfont';
+
+
 import './css/hint.css';
 import './css/editor.scss';
 import './css/draft.css';
-import './iconfont/iconfont';
+import 'normalize.css';
 
 /* componets */
 import EditorBar from './bar';
@@ -25,7 +29,7 @@ const linkDecorator = new CompositeDecorator([
   ]);
 
 
-class CustomEditor extends Component{
+class CustomDraftEditor extends Component{
     constructor(props){
         super(props);
         this.state = {
@@ -48,7 +52,7 @@ class CustomEditor extends Component{
     getHtml = ()=>{
         let editorState = this.state.editorState;
         let result = convert2Html(editorState.getCurrentContent());
-        console.log(result)
+        return result;
     }
 
     handleKeyCommand = (command, editorState) => {
@@ -171,4 +175,4 @@ class CustomEditor extends Component{
     }
 }
 
-export default CustomEditor;
+export default CustomDraftEditor;

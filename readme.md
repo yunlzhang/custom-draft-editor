@@ -13,3 +13,7 @@
 
     npm i custom-draft-editor
 
+````js
+    import CustomDraftEditor from 'custom-draft-editor'
+```
+

@@ -1,13 +1,11 @@
 const path = require('path');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    mode:"production",
+    mode: "development",
     entry: [
         "babel-polyfill",
-        "./src/index.js"
+        "./test.js"
     ],
     output: {
         path: path.resolve(__dirname, "dist"),
@@ -32,7 +30,7 @@ module.exports = {
         {
             test: /\.css$/,
             use: [
-                MiniCssExtractPlugin.loader,
+                "style-loader",
                 "css-loader"
             ]
         }
@@ -52,21 +50,16 @@ module.exports = {
         }
     },
     devtool: "source-map",
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        compress: true,
+        port: 9000
+    },
     externals:["React","ReactDOM"],
     plugins: [
-        new MiniCssExtractPlugin({
-            filename: "editor.css",
-            chunkFilename: "[id].css"
-        }),
-    ],
-    optimization: {
-        minimizer: [
-          new UglifyJsPlugin({
-            cache: true,
-            parallel: true,
-            sourceMap: true // set to true if you want JS source maps
-          }),
-          new OptimizeCSSAssetsPlugin({})
-        ]
-    }
+        new HtmlWebpackPlugin({
+			inject: true,
+			template: './test.html',
+        })
+    ]
 }

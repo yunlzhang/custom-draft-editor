@@ -18,7 +18,7 @@ export const blockToHTML = (block) => {
         const imgData = block.data;
         const text = block.text;
         return {
-            start: `<figure class="img-figure"><img src="${imgData.src}" alt="${text}" /><figcaption className="md-block-image-caption">`,
+            start: `<figure ><img src="${imgData.src}" alt="${text}" /><figcaption>`,
             end: '</figcaption></figure>',
         };
     }
@@ -33,26 +33,24 @@ export const blockToHTML = (block) => {
 };
 
 
-// export const entityToHTML = (entity, originalText) => {
-//   if (entity.type === Entity.LINK) {
-//     return (
-//       <a
-//         className="md-inline-link"
-//         href={entity.data.url}
-//         target="_blank"
-//         rel="noopener noreferrer"
-//       >
-//         {originalText}
-//       </a>
-//     );
-//   }
-//   return originalText;
-// };
+export const entityToHTML = (entity, originalText) => {
+  if (entity.type === 'LINK') {
+    return (
+      <a
+        href={entity.data.url}
+        target="_blank"
+      >
+        {originalText}
+      </a>
+    );
+  }
+  return originalText;
+};
 
 export const options = {
   styleToHTML,
   blockToHTML,
-//   entityToHTML,
+  entityToHTML,
 };
 
 export default (contentState, htmlOptions = options) => convertToHTML(htmlOptions)(contentState);

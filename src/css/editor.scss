@@ -1,9 +1,7 @@
-button{
-    padding:0;
-    margin:0;
-}
+@import './normalize.css';
 .custom-draft-editor{
     width:960px;
+    overflow:hidden;
     margin:0 auto;  
     font-size:16px;
     &.hide-placeholder{
@@ -47,6 +45,17 @@ button{
 
     .editor-content {
         padding: 20px 0;
+
+
+        img{
+            max-width: 100%;
+            margin:0 auto;
+        }
+
+
+
+
+
     }
 
 

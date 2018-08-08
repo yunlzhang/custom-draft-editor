@@ -11,6 +11,10 @@ function formatParams(data){
 }
 
 let customFetch = data => {
+
+    if(!fetch){
+        throw new Error("浏览器版本不支持fetch,请更换新版浏览器");
+    }
     if(data.method && data.method.toLowerCase() === 'post'){
         return fetch(data.url,{
             method:'POST',
@@ -39,31 +43,9 @@ let customFetch = data => {
     }
 }
 
-let upQiniu =  async function(path,file){
-    if(['[object Blob]','[object File]'].indexOf(Object.prototype.toString.call(file)) === -1){
-        throw new TypeError('file must be a file');
-    }
-    let uptoken;
-    let formData = new FormData();
-    await customFetch({
-        url:window.requestHost + '/gettoken'
-    }).then(res => {
-        uptoken = res.uptoken;
-    });
-    
-    formData.append('key',path+'/'+uuidv1());
-    formData.append('file',file);
-    formData.append('path',path);
-    formData.append('token',uptoken);
 
-    return await fetch(process.env.NODE_ENV === 'development' ? '//localhost:8083/upload' : '//upload.qiniup.com/',{
-        method:'POST',
-        body:formData,
-        mode:'cors'
-    }).then(response => {
-        return response.json();
-    });
-}
+
+
 let parseDom = function (str) {
 	　　 var objE = document.createElement("div");
 	　　 objE.innerHTML = str;
