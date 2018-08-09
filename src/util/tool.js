@@ -70,7 +70,6 @@ let judgePlatform = () => {
 
 export {
     customFetch,
-    upQiniu,
     parseDom,
     judgePlatform
 }

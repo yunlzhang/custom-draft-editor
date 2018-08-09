@@ -1,4 +1,4 @@
-import {EditorState,ContentBlock,ContentState,convertFromRaw,genKey} from 'draft-js';
+import {EditorState,ContentBlock,ContentState,convertFromRaw,genKey,SelectionState} from 'draft-js';
 import { Map, List } from 'immutable';
 import {judgePlatform} from './util/tool'
 
@@ -143,4 +143,16 @@ export const findLinkEntities = (contentBlock, callback, contentState) => {
 };
   
 
-  
+export  const moveSelectionToEnd = (editorState) => {
+    const content = editorState.getCurrentContent();
+    const blockMap = content.getBlockMap();
+    const key = blockMap.last().getKey();
+    const length = blockMap.last().getLength();
+    const selection = new SelectionState({
+        anchorKey: key,
+        anchorOffset: length,
+        focusKey: key,
+        focusOffset: length,
+    });
+    return EditorState.acceptSelection(editorState, selection);
+};

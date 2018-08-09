@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {EditorState,RichUtils,Modifier} from 'draft-js';
+import {EditorState,RichUtils,Modifier,} from 'draft-js';
+import {moveSelectionToEnd} from '../func';
+
 function IsURL(str_url){
     let reg = /(http|https):\/\/.+/g
     if (reg.test(str_url)){
@@ -8,6 +10,7 @@ function IsURL(str_url){
         return false;
     }
 }
+ 
 
 class InsertLink extends Component{
 
@@ -71,6 +74,8 @@ class InsertLink extends Component{
         }else{
             newEditorState = EditorState.set(editorState, { currentContent: contentStateWithEntity });
         }
+
+        newEditorState = moveSelectionToEnd(newEditorState);
         setEditorState(RichUtils.toggleLink(newEditorState, newEditorState.getSelection(), entityKey),()=>{
             setLinkData({
                 linkText:'',
@@ -78,6 +83,7 @@ class InsertLink extends Component{
                 isShow:false
             })
             editor && editor.focus();
+            
         });
     }
 
