@@ -7,8 +7,27 @@ class App extends React.Component{
 
 
     handleClick = () => {
-
         console.log(this.refs.editor.getHtml());
+
+    }
+
+    uploadFunc = (file,callback) => {
+        let formData = new FormData();
+
+        formData.append('file',file);
+
+
+        fetch('http://localhost:9001/upload',{
+            method:'POST',
+            body:formData
+        }).then(res => {
+            return res.json()
+        })
+        .then(res => {
+            if(res.code === 200){
+                callback(res.url)
+            }
+        })
     }
 
     render(){
@@ -20,7 +39,7 @@ class App extends React.Component{
                 }>获取文本内容</button>
 
                 
-                <CustomDraftEditor ref="editor"/>
+                <CustomDraftEditor ref="editor" uploadFunc={this.uploadFunc}/>
             </div>
         )
     }

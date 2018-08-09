@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Editor,RichUtils,CompositeDecorator} from 'draft-js';
+import {Editor,RichUtils,CompositeDecorator,Modifier} from 'draft-js';
 import {resetBlockWithType,addNewBlockAt,getCurrentBlock,createEditorState,findLinkEntities} from './func'
 import isSoftNewlineEvent from 'draft-js/lib/isSoftNewlineEvent';
 import {CONTINUS_BLOCKS} from './constant'
@@ -10,7 +10,6 @@ import './iconfont/iconfont';
 import './css/hint.css';
 import './css/editor.scss';
 import './css/draft.css';
-import 'normalize.css';
 
 /* componets */
 import EditorBar from './bar';
@@ -82,6 +81,34 @@ class CustomDraftEditor extends Component{
         );
     }
 
+    handlePastedText = (text, html, es) => {
+        const currentBlock = getCurrentBlock(this.state.editorState);
+        console.log(currentBlock.getType())
+        if (currentBlock.getType() === 'atomic:image') {
+            const { editorState } = this.state;
+            const content = editorState.getCurrentContent();
+            this.onChange(
+                EditorState.push(
+                    editorState,
+                    Modifier.insertText(
+                        content,
+                        editorState.getSelection(),
+                        text
+                    )
+                )
+            );
+            return 'handled';
+        }
+
+        // if (this.handlePastedText && this.handlePastedText(text, html, es) === 'handled') {
+        //     alert(2);
+        //     return 'handled';
+        // }
+        return 'not-handled';
+    }
+
+
+
     handleReturn = (e) =>{
         const { editorState } = this.state;
         if (isSoftNewlineEvent(e)) {
@@ -152,6 +179,7 @@ class CustomDraftEditor extends Component{
                     setLinkData={this.setLinkData}
                     getEditorState = {this.getEditorState}
                     editor={this.editor} 
+                    uploadFunc={this.props.uploadFunc}
                     editorState={editorState}></EditorBar>
                 </div>
                 <div className="editor-content">
@@ -162,6 +190,7 @@ class CustomDraftEditor extends Component{
                         placeholder="writing something"
                         blockRendererFn={this.blockRendererFn}
                         ref={(ref) => this.editor = ref}
+                        handlePastedText={this.handlePastedText}
                         onChange={this.onChange} />
                     <InsertLink 
                         setEditorState={this.onChange}

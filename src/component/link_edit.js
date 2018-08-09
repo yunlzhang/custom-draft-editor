@@ -2,14 +2,7 @@ import React, { Component } from 'react';
 import {EditorState,RichUtils,Modifier,} from 'draft-js';
 import {moveSelectionToEnd} from '../func';
 
-function IsURL(str_url){
-    let reg = /(http|https):\/\/.+/g
-    if (reg.test(str_url)){
-        return true;
-    }else{
-        return false;
-    }
-}
+import {isURL} from '../util/tool';
  
 
 class InsertLink extends Component{
@@ -33,7 +26,7 @@ class InsertLink extends Component{
                 linkAddress:e.target.value
             })
             this.setState({
-                isActive:IsURL(e.target.value)
+                isActive:isURL(e.target.value)
             })
         }        
     }

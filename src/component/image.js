@@ -21,21 +21,26 @@ export default class ImageButton extends React.Component {
         })
     }
 
+
+    setImg(src){
+        this.props.setEditorState(addNewBlock(
+            this.props.getEditorState(),
+            'atomic:image', {
+                src,
+            }
+        ));
+        this.setState({
+            isActive:false
+        })
+    }
+
     onChange(e) {
         e.preventDefault();
+        let uploadFunc = this.props.uploadFunc;
+        if(typeof uploadFunc !== 'function') return;
         const file = e.target.files[0];
         if (file.type.indexOf('image/') === 0) {
-             // eslint-disable-next-line no-undef
-            const src = URL.createObjectURL(file);
-            this.props.setEditorState(addNewBlock(
-                this.props.getEditorState(),
-                'atomic:image', {
-                    src,
-                }
-            ));
-            this.setState({
-                isActive:false
-            })
+            uploadFunc(file,this.setImg.bind(this))            
         }
     }
 
