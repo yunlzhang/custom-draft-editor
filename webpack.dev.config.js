@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     mode: "development",
     entry: [
-        "babel-polyfill",
         "./test.js"
     ],
     output: {
@@ -55,7 +54,10 @@ module.exports = {
         compress: true,
         port: 9000
     },
-    externals:["React","ReactDOM"],
+    externals:{
+        "react":"React",
+        "react-dom":"ReactDOM"
+    },
     plugins: [
         new HtmlWebpackPlugin({
 			inject: true,

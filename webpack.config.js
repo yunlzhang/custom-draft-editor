@@ -2,11 +2,11 @@ const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     mode:"production",
     entry: [
-        "babel-polyfill",
         "./src/index.js"
     ],
     output: {
@@ -30,10 +30,11 @@ module.exports = {
             ]
         },
         {
-            test: /\.css$/,
+            test: /\.(sa|sc|c)ss$/,
             use: [
                 MiniCssExtractPlugin.loader,
-                "css-loader"
+                "css-loader",
+                "sass-loader"
             ]
         }
     ]
@@ -51,13 +52,24 @@ module.exports = {
             return assetFilename.endsWith('.css') || assetFilename.endsWith('.js');
         }
     },
-    devtool: "source-map",
-    externals:["React","ReactDOM"],
+    devtool: "false",
+    externals:{
+        "react":"React",
+        "react-dom":"ReactDOM",
+        "draft-js":"Draft",
+        'react-dom/server': {
+            root: 'ReactDOMServer',
+            commonjs2: 'react-dom/server',
+            commonjs: 'react-dom/server',
+            amd: 'react-dom/server'
+        }
+    },
     plugins: [
         new MiniCssExtractPlugin({
             filename: "editor.css",
             chunkFilename: "[id].css"
         }),
+        new BundleAnalyzerPlugin()
     ],
     optimization: {
         minimizer: [
