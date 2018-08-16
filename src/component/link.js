@@ -38,7 +38,7 @@ export default class LinkButton extends Component{
                 className={`editor-control hint--bottom ${this.state.isActive ? 'active' : ''}`}
                 type="button"
                 onClick={this.onClick}
-                aria-label={label+`(${generateKeyBind(this.props)})`}
+                aria-label={label}//+`(${generateKeyBind(this.props)})`
             > 
                 <svg aria-hidden="true" className="icon"><use xlinkHref='#icon-link'></use></svg>
             </button>

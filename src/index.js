@@ -83,7 +83,6 @@ class CustomDraftEditor extends Component{
 
     handlePastedText = (text, html, es) => {
         const currentBlock = getCurrentBlock(this.state.editorState);
-        console.log(currentBlock.getType())
         if (currentBlock.getType() === 'atomic:image') {
             const { editorState } = this.state;
             const content = editorState.getCurrentContent();
@@ -99,11 +98,6 @@ class CustomDraftEditor extends Component{
             );
             return 'handled';
         }
-
-        // if (this.handlePastedText && this.handlePastedText(text, html, es) === 'handled') {
-        //     alert(2);
-        //     return 'handled';
-        // }
         return 'not-handled';
     }
 

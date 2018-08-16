@@ -96,6 +96,14 @@ const CUSTOM_BUTTONS = {
         keyWin:'ctrl+alt+c',
         keyMAC:'⌘+⌥+c',
         type:'block'
+    },
+    LINK:{
+        label: 'link',
+        style: 'entity',
+        icon: 'icon-link',
+        keyWin:'',
+        keyMAC:'',
+        type:'inline'
     }
 }
 

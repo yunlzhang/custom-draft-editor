@@ -12,7 +12,7 @@ const InlineControl = props => {
     
     return <button 
         className={`editor-control hint--bottom editor-${props.label} ${currentStyle.has(props.style) ? 'active' :''}` } 
-        aria-label={props.label+`(${generateKeyBind(props)})`}
+        aria-label={props.label}//+`(${generateKeyBind(props)})`
         onMouseDown={
             (e) => {
                 e.preventDefault();
@@ -32,7 +32,7 @@ const BlockControl = props => {
         .getType();
     return <button 
         className={`editor-control hint--bottom editor-${props.label} ${props.style === blockType ? 'active' :''}` } 
-        aria-label={props.label+`(${generateKeyBind(props)})`}
+        aria-label={props.label}//+`(${generateKeyBind(props)})`
         onMouseDown={
             (e) => {
                 e.preventDefault();
