@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
-import {Editor,RichUtils,CompositeDecorator,Modifier} from 'draft-js';
+import {Editor,EditorState,RichUtils,CompositeDecorator,Modifier,convertToRaw} from 'draft-js';
+import {stateToHTML} from 'draft-js-export-html';
 import {resetBlockWithType,addNewBlockAt,getCurrentBlock,createEditorState,findLinkEntities} from './func'
 import isSoftNewlineEvent from 'draft-js/lib/isSoftNewlineEvent';
 import {CONTINUS_BLOCKS} from './constant'
@@ -50,7 +51,18 @@ class CustomDraftEditor extends Component{
 
     getHtml = ()=>{
         let editorState = this.state.editorState;
-        let result = convert2Html(editorState.getCurrentContent());
+        let result = stateToHTML(editorState.getCurrentContent(),{
+            blockRenderers: {
+                'atomic:image': (block) => {
+                    console.log(block);
+                    let data = block.getData();
+                    // console.log(data.get('src'),data.get('text'));
+                    let imgData = block.data;
+                    let  text = block.text;
+                    return `<figure ><img src="${imgData.src}" alt="${text}" /><figcaption></figcaption></figure>`;
+                },
+            },
+        });
         return result;
     }
 

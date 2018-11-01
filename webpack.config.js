@@ -11,7 +11,8 @@ module.exports = {
     ],
     output: {
         path: path.resolve(__dirname, "dist"),
-        filename: "editor.min.js",
+        libraryTarget:"umd",//https://webpack.js.org/configuration/output/
+        filename:"editor.min.js"
     },
     module: {
         rules: [{
@@ -55,8 +56,6 @@ module.exports = {
     devtool: "false",
     externals:{
         "react":"React",
-        "react-dom":"ReactDOM",
-        "draft-js":"Draft",
         'react-dom/server': {
             root: 'ReactDOMServer',
             commonjs2: 'react-dom/server',
@@ -66,7 +65,7 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: "editor.css",
+            filename: "editor.min.css",
             chunkFilename: "[id].css"
         }),
         new BundleAnalyzerPlugin()

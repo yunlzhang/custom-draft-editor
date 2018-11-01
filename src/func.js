@@ -55,11 +55,11 @@ export const addNewBlockAt = (editorState,pivotBlockKey,newBlockType = 'unstyled
         blockMap: newBlockMap,
         selectionBefore: selection,
         selectionAfter: selection.merge({
-        anchorKey: newBlockKey,
-        anchorOffset: 0,
-        focusKey: newBlockKey,
-        focusOffset: 0,
-        isBackward: false,
+            anchorKey: newBlockKey,
+            anchorOffset: 0,
+            focusKey: newBlockKey,
+            focusOffset: 0,
+            isBackward: false,
         }),
     });
     return EditorState.push(editorState, newContent, 'split-block');
@@ -100,6 +100,9 @@ export const addNewBlock = (editorState, newType = 'unstyled', initialData = {})
         });
         return EditorState.push(editorState, newContentState, 'change-block-type');
     }
+
+    alert(1111);
+
     return editorState;
 };
 

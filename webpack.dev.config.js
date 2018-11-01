@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack')
 
 module.exports = {
     mode: "development",
@@ -54,14 +55,23 @@ module.exports = {
         compress: true,
         port: 9000
     },
-    externals:{
-        "react":"React",
-        "react-dom":"ReactDOM"
-    },
+    // externals:{
+    //     // "react":"React",
+    //     // "react-dom":"ReactDOM",
+    //     // 'react-dom/server': {
+    //     //     root: 'ReactDOMServer',
+    //     //     commonjs2: 'react-dom/server',
+    //     //     commonjs: 'react-dom/server',
+    //     //     amd: 'react-dom/server'
+    //     // }
+    // },
     plugins: [
         new HtmlWebpackPlugin({
 			inject: true,
 			template: './test.html',
+        }),
+        new webpack.ProvidePlugin({
+            "React": "react",
         })
     ]
 }

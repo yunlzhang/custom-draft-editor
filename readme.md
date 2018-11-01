@@ -13,7 +13,13 @@
 
     npm i custom-draft-editor
 
-````js
+3、 use it
+
+```js
     import CustomDraftEditor from 'custom-draft-editor'
 ```
+in your scss | sass | css file
 
+```
+    @import 'editor.min.css'
+```
