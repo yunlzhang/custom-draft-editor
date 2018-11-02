@@ -20,8 +20,3 @@
 
     import 'custom-draft-editor/dist/editor.min.css'
 ```
-or you can include css in your scss | sass | css file througn another way
-
-```
-    @import 'editor.min.css'
-```
