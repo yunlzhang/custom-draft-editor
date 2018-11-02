@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import './dist/editor.css';
+import './dist/editor.min.css';
 
-import CustomDraftEditor from './dist/editor.min.js';
-
+import CustomDraftEditor from './dist/editor.min';
+console.log(CustomDraftEditor)
 class App extends React.Component{
 
     handleClick = () => {

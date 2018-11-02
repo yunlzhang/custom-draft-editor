@@ -17,8 +17,10 @@
 
 ```js
     import CustomDraftEditor from 'custom-draft-editor'
+
+    import 'custom-draft-editor/dist/editor.min.css'
 ```
-in your scss | sass | css file
+or you can include css in your scss | sass | css file througn another way
 
 ```
     @import 'editor.min.css'

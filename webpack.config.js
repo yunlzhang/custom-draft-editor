@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const webpack = require('webpack');
 
 module.exports = {
     mode:"production",
@@ -56,12 +57,7 @@ module.exports = {
     devtool: "false",
     externals:{
         "react":"React",
-        'react-dom/server': {
-            root: 'ReactDOMServer',
-            commonjs2: 'react-dom/server',
-            commonjs: 'react-dom/server',
-            amd: 'react-dom/server'
-        }
+        "react-dom":"ReactDOM"
     },
     plugins: [
         new MiniCssExtractPlugin({
@@ -71,6 +67,7 @@ module.exports = {
         new BundleAnalyzerPlugin()
     ],
     optimization: {
+        // minimize:false
         minimizer: [
           new UglifyJsPlugin({
             cache: true,

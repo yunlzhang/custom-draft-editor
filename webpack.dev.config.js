@@ -55,16 +55,6 @@ module.exports = {
         compress: true,
         port: 9000
     },
-    // externals:{
-    //     // "react":"React",
-    //     // "react-dom":"ReactDOM",
-    //     // 'react-dom/server': {
-    //     //     root: 'ReactDOMServer',
-    //     //     commonjs2: 'react-dom/server',
-    //     //     commonjs: 'react-dom/server',
-    //     //     amd: 'react-dom/server'
-    //     // }
-    // },
     plugins: [
         new HtmlWebpackPlugin({
 			inject: true,
@@ -72,6 +62,7 @@ module.exports = {
         }),
         new webpack.ProvidePlugin({
             "React": "react",
+            "ReactDOM":"react-dom"
         })
     ]
 }
