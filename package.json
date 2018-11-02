@@ -1,6 +1,6 @@
 {
   "name": "custom-draft-editor",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "an editor based on react & draft-js",
   "main": "dist/editor.min.js",
   "style":"dist/editor.min.css",

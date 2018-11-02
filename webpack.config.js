@@ -56,8 +56,8 @@ module.exports = {
     },
     devtool: "false",
     externals:{
-        "react":"React",
-        "react-dom":"ReactDOM"
+        "react":"react",
+        "react-dom":"react-dom"
     },
     plugins: [
         new MiniCssExtractPlugin({
